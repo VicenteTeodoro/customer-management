@@ -4,9 +4,9 @@
 
 :root {
     /* Color Palette - Premium Dark Theme */
-    --bg-dark: #0b0c10;
-    --bg-surface: rgba(22, 24, 35, 0.65);
-    --bg-surface-hover: rgba(29, 31, 46, 0.8);
+    --bg-dark: #16161a;
+    --bg-surface: rgba(36, 36, 45, 0.65);
+    --bg-surface-hover: rgba(45, 45, 56, 0.8);
     
     /* Neon Blue / Cyan Gradient Accent Palette */
     --accent-blue-start: #00d2ff;

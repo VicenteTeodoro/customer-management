@@ -1,0 +1,40 @@
+{
+  "name": "Customer Management - Dev Container",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+
+  // Setup IDE configurations and plugin installations inside container
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "python.defaultInterpreterPath": "/usr/bin/python3"
+      },
+      "extensions": [
+        // C# & .NET SDK Integrations
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        // Python Stack
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        // Formatting, Quality, & Git Extensions
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "christian-kohler.path-intellisense"
+      ]
+    }
+  },
+
+  // Runs as non-root developer inside the environment
+  "remoteUser": "developer",
+
+  // Ensure target ports are mapped dynamically
+  "forwardPorts": [3000, 5173, 8000],
+
+  "postCreateCommand": "echo '🚀 Customer Management container environment is ready for development!'"
+}

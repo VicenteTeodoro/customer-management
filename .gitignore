@@ -1,0 +1,39 @@
+# .gitignore for customer-management
+
+### C# / .NET Core Core Ignores
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.docstates
+
+### IDE Settings & Caches
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+### Docker & Containers
+.dockerignore
+Dockerfile.local
+docker-compose.override.yml
+
+### HVE-Core Local AI Workflow Tracking
+.copilot-tracking/*
+!.copilot-tracking/plans/
+!.copilot-tracking/changes/
+
+### OS / System Caches
+.DS_Store
+Thumbs.db
+
+### Shell History Caches
+.zsh_history
+.devcontainer/.zsh_history

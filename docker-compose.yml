@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: customer_management_container
+    volumes:
+      # Map host workspace inside container
+      - .:/workspace:cached
+      # Persist CLI command history across rebuilding
+      - shell_history:/home/developer/.oh-my-zsh
+    ports:
+      # Web API Port (Binds launchSettings to localhost)
+      - "8000:8000"
+      # Exposes common frontend ports (Vite, React/Next.js)
+      - "5173:5173"
+      - "3000:3000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    # Keep container running indefinitely
+    command: /bin/zsh -c "sleep infinity"
+
+volumes:
+  shell_history:
+    name: customer_management_shell_cache

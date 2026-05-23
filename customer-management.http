@@ -1,0 +1,192 @@
+# ==============================================================================
+# Customer Management API - Interactive REST Client Test Cases
+# ==============================================================================
+# This file is structured for testing the REST endpoints using the VS Code REST 
+# Client extension. Make sure the API service is running before executing.
+#
+# Base URL: http://localhost:8000 (standard port configuration forwarded via Docker)
+# ==============================================================================
+
+@Host = http://localhost:8000
+
+# ------------------------------------------------------------------------------
+# 1. READ OPERATIONS (GET)
+# ------------------------------------------------------------------------------
+
+### Retrieve All Tracked Customers (Initial Seed Data)
+# Expected Response: 200 OK with a list of 3 pre-seeded customers.
+GET {{Host}}/api/customers
+Accept: application/json
+
+###
+
+### Retrieve Existing Customer by ID (Alice Smith)
+# Expected Response: 200 OK with Alice's profile and seeded interaction notes.
+GET {{Host}}/api/customers/1
+Accept: application/json
+
+###
+
+### Retrieve Non-Existing Customer by ID (Edge Case - Not Found)
+# Expected Response: 404 Not Found with error message.
+GET {{Host}}/api/customers/9999
+Accept: application/json
+
+###
+
+
+# ------------------------------------------------------------------------------
+# 2. CREATE OPERATIONS (POST)
+# ------------------------------------------------------------------------------
+
+### Create a Valid Customer Profile (Lead Status)
+# Expected Response: 201 Created with Location header and populated customer object.
+# Save the response or note the returned ID (should be 4 in a fresh launch).
+POST {{Host}}/api/customers
+Content-Type: application/json
+
+{
+  "firstName": "Diana",
+  "lastName": "Prince",
+  "email": "diana@themyscira.gov",
+  "company": "Justice Alliance",
+  "status": "Lead"
+}
+
+###
+
+### Create Customer (Validation Edge Case - Missing Names)
+# Expected Response: 400 Bad Request with Validation Error.
+POST {{Host}}/api/customers
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "lastName": "",
+  "email": "missing.names@example.com",
+  "company": "Incomplete Inc.",
+  "status": "Pending"
+}
+
+###
+
+### Create Customer (Validation Edge Case - Missing Email)
+# Expected Response: 400 Bad Request with Validation Error.
+POST {{Host}}/api/customers
+Content-Type: application/json
+
+{
+  "firstName": "Bruce",
+  "lastName": "Wayne",
+  "email": "",
+  "company": "Wayne Enterprises",
+  "status": "Active"
+}
+
+###
+
+
+# ------------------------------------------------------------------------------
+# 3. UPDATE OPERATIONS (PUT)
+# ------------------------------------------------------------------------------
+
+### Update an Existing Customer (Full Profile Update)
+# Expected Response: 200 OK with the updated details.
+# This updates Alice Smith (ID: 1) status and company.
+PUT {{Host}}/api/customers/1
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice.smith@acme-global.com",
+  "company": "Acme Global Solutions",
+  "status": "Active"
+}
+
+###
+
+### Update Customer (Validation Edge Case - Missing Names)
+# Expected Response: 400 Bad Request.
+PUT {{Host}}/api/customers/1
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "lastName": "",
+  "email": "alice.smith@acme-global.com"
+}
+
+###
+
+### Update Non-Existing Customer (Edge Case - Not Found)
+# Expected Response: 404 Not Found.
+PUT {{Host}}/api/customers/8888
+Content-Type: application/json
+
+{
+  "firstName": "Ghost",
+  "lastName": "User",
+  "email": "ghost@void.null",
+  "company": "None",
+  "status": "Inactive"
+}
+
+###
+
+
+# ------------------------------------------------------------------------------
+# 4. CUSTOMER INTERACTION NOTES (POST)
+# ------------------------------------------------------------------------------
+
+### Add a Valid Interaction Note (Successful Case)
+# Expected Response: 200 OK with the target customer object containing the new note.
+# Adds a note to Bob Jones (ID: 2).
+POST {{Host}}/api/customers/2/notes
+Content-Type: application/json
+
+{
+  "content": "Follow-up sales call scheduled for next Thursday to discuss contract customization."
+}
+
+###
+
+### Add Note (Validation Edge Case - Empty Content)
+# Expected Response: 400 Bad Request.
+POST {{Host}}/api/customers/2/notes
+Content-Type: application/json
+
+{
+  "content": ""
+}
+
+###
+
+### Add Note to Non-Existing Customer (Edge Case - Not Found)
+# Expected Response: 404 Not Found.
+POST {{Host}}/api/customers/7777/notes
+Content-Type: application/json
+
+{
+  "content": "Meeting summary: unable to locate host customer profile."
+}
+
+###
+
+
+# ------------------------------------------------------------------------------
+# 5. DELETE OPERATIONS (DELETE)
+# ------------------------------------------------------------------------------
+
+### Delete an Existing Customer (Charlie Brown)
+# Expected Response: 204 No Content.
+# Deletes Charlie Brown (ID: 3).
+DELETE {{Host}}/api/customers/3
+Accept: application/json
+
+###
+
+### Delete Non-Existing Customer (Edge Case - Not Found)
+# Expected Response: 404 Not Found.
+DELETE {{Host}}/api/customers/3
+Accept: application/json

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management Portal</title>
+    
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Ambient glowing backgrounds for modern glassmorphism aesthetic -->
+    <div class="ambient-glow bg-blue"></div>
+    <div class="ambient-glow bg-purple"></div>
+
+    <div class="app-container">
+        <!-- Main Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <h1 id="app-title" class="brand-title">Customer Management</h1>
+            </div>
+            <div class="system-status">
+                <span class="status-indicator online"></span>
+                <span class="status-label">HVE-Core Engine Online</span>
+            </div>
+        </header>
+
+        <!-- Main Display Container -->
+        <main class="main-content">
+            <section class="welcome-card">
+                <div class="welcome-icon">
+                    <i class="fa-solid fa-cubes-stacked"></i>
+                </div>
+                <h2 class="welcome-title">Welcome to your Portal</h2>
+                <p class="welcome-desc">
+                    This Single Page Application serves as your core customer relationship management gateway. 
+                    The host-virtual-environment pipeline has mounted successfully, laying a premium foundation for the upcoming data grids, metrics trackers, and lead operations.
+                </p>
+                <div class="next-steps">
+                    <span class="step-badge"><i class="fa-solid fa-code-fork"></i> Iteration 1 Active</span>
+                    <span class="step-badge"><i class="fa-solid fa-circle-nodes"></i> API Connected</span>
+                </div>
+            </section>
+        </main>
+
+        <!-- System Footer -->
+        <footer class="app-footer">
+            <p class="footer-text">&copy; 2026 Vicente Teodoro. Designed for high-fidelity HVE execution.</p>
+            <div class="footer-links">
+                <a href="/swagger" class="footer-link" target="_blank">
+                    <i class="fa-solid fa-rectangle-terminal"></i> API Swagger Docs
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Core SPA logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>
